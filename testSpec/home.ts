@@ -29,4 +29,9 @@ describe('Test owasp-juice.shop', () => {
         expect(await home.itemsDisplayed.count()).toBe(12)
     })
 
+    it('Check if the items matches and number of items per page', async () => {
+        let home = new Home()
+        expect(await home.numberOfItems.getText()).toContain(`${await home.itemsDisplayed.count()}`)
+    })
+
 })
