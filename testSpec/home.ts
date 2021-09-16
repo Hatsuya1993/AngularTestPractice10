@@ -34,4 +34,9 @@ describe('Test owasp-juice.shop', () => {
         expect(await home.numberOfItems.getText()).toContain(`${await home.itemsDisplayed.count()}`)
     })
 
+    fit('Check if the drop down number of pages is correct', async () => {
+        let home = new Home()
+        expect(await home.checkEachPagesDropDown()).toBe(3)
+    })
+
 })
