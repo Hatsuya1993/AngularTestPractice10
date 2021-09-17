@@ -1,13 +1,13 @@
-import { browser, protractor, $ } from 'protractor';
+import { browser } from 'protractor';
 import { Home } from '../pageObject/home';
+import {Click} from "../helper/click"
 
-describe('Test owasp-juice.shop', () => {
+describe('Test demoqa', () => {
     
     beforeEach(async() => {
         browser.waitForAngularEnabled(false);
         let home = new Home()
         await home.website
-        await home.dismissWelcome.click()
         await browser.sleep(5000)
     })
 
@@ -16,27 +16,18 @@ describe('Test owasp-juice.shop', () => {
     })
 
     it('Check if the url is correct', async() => {
-        expect(await browser.getCurrentUrl()).toContain('owasp-juice')
+        expect(await browser.getCurrentUrl()).toContain('demoqa')
     })
 
-    it('Check default number of items per list in dropdown is correct', async () => {
-        let home = new Home()
-        expect(await home.numberOfItems.getText()).toContain('12')
+    it('Check the number of cards', async () => {
+        const home = new Home()
+        expect(await home.allCards.count()).toBe(6)
     })
 
-    it('Count the number of items and verify', async () => {
-        let home = new Home()
-        expect(await home.itemsDisplayed.count()).toBe(12)
-    })
-
-    it('Check if the items matches and number of items per page', async () => {
-        let home = new Home()
-        expect(await home.numberOfItems.getText()).toContain(`${await home.itemsDisplayed.count()}`)
-    })
-
-    fit('Check if the drop down number of pages is correct', async () => {
-        let home = new Home()
-        expect(await home.checkEachPagesDropDown()).toBe(3)
+    it('Check when the title is pressed, it returns to the homepage', async () => {
+        const home = new Home()
+        await Click.clickLink(home.title)
+        expect(await browser.getCurrentUrl()).toContain('demoqa')
     })
 
 })
