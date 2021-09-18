@@ -30,4 +30,10 @@ describe('Test demoqa', () => {
         expect(await browser.getCurrentUrl()).toContain('demoqa')
     })
 
+    it('Check when the banner is clicked, it will open a new tab', async() => {
+        const home = new Home()
+        await home.banner.click()
+        expect(await home.countTabs()).toBe(2)
+    })
+
 })
