@@ -8,6 +8,7 @@ describe('Test demoqa', () => {
         browser.waitForAngularEnabled(false);
         let home = new Home()
         await home.website
+        browser.manage().window().maximize()
         await browser.sleep(5000)
     })
 
@@ -34,6 +35,12 @@ describe('Test demoqa', () => {
         const home = new Home()
         await home.banner.click()
         expect(await home.countTabs()).toBe(2)
+    })
+
+    fit('Check if elements clicked will move to the correct url', async () => {
+        const home = new Home()
+        await home.optionsCheck("Elements")
+        expect(await browser.getCurrentUrl()).toContain("elements")
     })
 
 })
